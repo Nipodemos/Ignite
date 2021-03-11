@@ -27,10 +27,18 @@ server.post("/account", (request, response) => {
     id: uuidv4(),
     name,
     cpf,
-    statment: [],
+    statement: [],
   });
 
   return response.status(201).json(customers[customers.length - 1]);
+});
+
+server.get("/statement/:cpf", (request, response) => {
+  const { cpf } = request.params;
+  // console.log("all customers :>> ", customers);
+  const customer = customers.find((customer) => customer.cpf === cpf);
+
+  return response.json(customer.statement);
 });
 
 server.listen(3333, () => {
