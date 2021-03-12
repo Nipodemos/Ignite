@@ -9,7 +9,6 @@ server.use(express.json());
 
 function verifyIfExistAccountCpf(request, response, next) {
   const { cpf } = request.headers;
-  // console.log("all customers :>> ", customers);
   const customer = customers.find((customer) => customer.cpf === cpf);
 
   if (!customer) {
@@ -28,7 +27,6 @@ function verifyIfExistAccountCpf(request, response, next) {
  * statement []
  */
 server.post("/account", (request, response) => {
-  console.log("request :>> ", request);
   const { cpf, name } = request.body;
 
   const customerAlreadyExists = customers.some(
@@ -47,6 +45,21 @@ server.post("/account", (request, response) => {
   });
 
   return response.status(201).json(customers[customers.length - 1]);
+});
+
+server.post("/deposit", verifyIfExistAccountCpf, (request, response) => {
+  const { amount, description } = request.body;
+  const { customer } = request;
+
+  const statementOperation = {
+    description,
+    amount,
+    createdAt: new Date(),
+    type: "credit",
+  };
+  customer.statement.push(statementOperation);
+
+  return response.status(201).send();
 });
 
 server.get("/statement/", verifyIfExistAccountCpf, (request, response) => {
