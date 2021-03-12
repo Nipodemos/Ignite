@@ -94,8 +94,25 @@ server.post("/withdraw", verifyIfExistAccountCpf, (request, response) => {
   return response.status(201).send();
 });
 
-server.get("/statement/", verifyIfExistAccountCpf, (request, response) => {
+server.get("/statement", verifyIfExistAccountCpf, (request, response) => {
   const { customer } = request;
+  const { date } = request.query;
+  console.log("date :>> ", date);
+
+  if (date) {
+    const dateFormat = new Date(date + " 00:00");
+
+    const filteredStatements = customer.statement.filter((statement) => {
+      console.log("dateFormat :>> ", dateFormat);
+      console.log("statement.createdAt :>> ", statement.createdAt);
+
+      return (
+        statement.createdAt.toDateString() ===
+        new Date(dateFormat).toDateString()
+      );
+    });
+    return response.json(filteredStatements);
+  }
   return response.json(customer.statement);
 });
 
