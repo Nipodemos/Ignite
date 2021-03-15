@@ -39,6 +39,12 @@ function getBalance(statement) {
  * id - uuid
  * statement []
  */
+
+server.get("/account", verifyIfExistAccountCpf, () => {
+  const { customer } = request;
+  return response.json(customer);
+});
+
 server.post("/account", (request, response) => {
   const { cpf, name } = request.body;
 
@@ -58,6 +64,15 @@ server.post("/account", (request, response) => {
   });
 
   return response.status(201).json(customers[customers.length - 1]);
+});
+
+server.put("/account", verifyIfExistAccountCpf, (request, response) => {
+  const { name } = request.body;
+  const { customer } = request;
+
+  customer.name = name;
+
+  return response.status(201).send();
 });
 
 server.post("/deposit", verifyIfExistAccountCpf, (request, response) => {
