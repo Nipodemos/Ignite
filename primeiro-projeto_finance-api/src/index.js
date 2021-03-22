@@ -1,3 +1,4 @@
+const { response } = require("express");
 const express = require("express");
 const { v4: uuidv4 } = require("uuid");
 
@@ -75,6 +76,14 @@ server.put("/account", verifyIfExistAccountCpf, (request, response) => {
   return response.status(201).send();
 });
 
+server.delete("/account", verifyIfExistAccountCpf, (request, response) => {
+  const { customer } = request;
+
+  customers = customers.filter((item) => item.id !== customer.id);
+
+  return response.json(customers);
+});
+
 server.post("/deposit", verifyIfExistAccountCpf, (request, response) => {
   const { amount, description } = request.body;
   const { customer } = request;
@@ -129,6 +138,14 @@ server.get("/statement", verifyIfExistAccountCpf, (request, response) => {
     return response.json(filteredStatements);
   }
   return response.json(customer.statement);
+});
+
+server.get("/balance", verifyIfExistAccountCpf, (request, response) => {
+  const { customer } = request;
+
+  const balance = getBalance(customer.statement);
+
+  return response.json(balance);
 });
 
 server.listen(3333, () => {
