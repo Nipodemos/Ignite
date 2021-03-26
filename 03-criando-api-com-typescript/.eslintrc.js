@@ -4,53 +4,53 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: ["airbnb-base", "plugin:@typescript-eslint/recommended"],
-  parser: "@typescript-eslint/parser",
+  extends: ['airbnb-base', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ["@typescript-eslint", "eslint-plugin-import-helpers"],
+  plugins: ['@typescript-eslint', 'eslint-plugin-import-helpers'],
   rules: {
-    "import/no-unresolved": "error",
-    "@typescript-eslint/naming-convention": [
-      "error",
+    'import/no-unresolved': 'error',
+    '@typescript-eslint/naming-convention': [
+      'error',
       {
-        selector: "interface",
-        format: ["PascalCase"],
+        selector: 'interface',
+        format: ['PascalCase'],
         custom: {
-          regex: "^I[A-Z]",
+          regex: '^I[A-Z]',
           match: true,
         },
       },
     ],
-    "class-methods-use-this": "off",
-    "import/prefer-default-export": "off",
-    "no-shadow": "off",
-    "no-console": "off",
-    "no-useless-constructor": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
+    'class-methods-use-this': 'off',
+    'import/prefer-default-export': 'off',
+    'no-shadow': 'off',
+    'no-console': 'off',
+    'no-useless-constructor': 'off',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
       {
-        ts: "never",
+        ts: 'never',
       },
     ],
-    "import-helpers/order-imports": [
-      "warn",
+    'import-helpers/order-imports': [
+      'warn',
       {
-        newlinesBetween: "always",
-        groups: ["module", "/^@shared/", ["parent", "sibling", "index"]],
-        alphabetize: { order: "asc", ignoreCase: true },
+        newlinesBetween: 'always',
+        groups: ['module', '/^@shared/', ['parent', 'sibling', 'index']],
+        alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      { devDependencies: ["**/*.spec.js"] },
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/*.spec.js'] },
     ],
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       typescript: {},
     },
   },
