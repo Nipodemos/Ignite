@@ -4,11 +4,15 @@ interface ICreateCategoryDTO {
   name: string;
   description: string;
 }
-class CategoriesRepository {
+export default class CategoriesRepository {
   private categories: Category[];
 
   constructor() {
     this.categories = [];
+  }
+
+  getAll(): Category[] {
+    return this.categories;
   }
 
   create({ name, description }: ICreateCategoryDTO): void {
@@ -21,6 +25,12 @@ class CategoriesRepository {
 
     this.categories.push(category);
   }
-}
 
-export { CategoriesRepository };
+  findByName(name: string): boolean {
+    const foundCategory = this.categories.some(
+      (category) => category.name === name,
+    );
+
+    return foundCategory;
+  }
+}

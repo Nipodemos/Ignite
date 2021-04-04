@@ -3,13 +3,13 @@ import { v4 as uuidV4 } from 'uuid';
 export default class Category {
   id?: string;
 
-  name!: string;
+  name: string;
 
-  description!: string;
+  description: string;
 
-  createdAt!: Date;
+  createdAt: Date;
 
-  updatedAt!: Date;
+  updatedAt: Date;
 
   constructor({ id, name, description, createdAt, updatedAt }: Category) {
     this.id = id;
