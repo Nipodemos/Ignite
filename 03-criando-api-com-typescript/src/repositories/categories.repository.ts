@@ -1,9 +1,6 @@
 import Category from '../models/category.model';
+import { ICreateCategoryDTO } from './interface.categories.repository';
 
-interface ICreateCategoryDTO {
-  name: string;
-  description: string;
-}
 export default class CategoriesRepository {
   private categories: Category[];
 
