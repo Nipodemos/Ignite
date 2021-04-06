@@ -5,7 +5,7 @@ import ICategoriesRepository, {
 
 export default class PostgresCategoriesRepository
   implements ICategoriesRepository {
-  findByName(name: string): Category {
+  findByName(name: string): boolean {
     console.log('name :>> ', name);
     throw new Error('Method not implemented.');
   }
