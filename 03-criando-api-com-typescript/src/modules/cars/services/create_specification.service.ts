@@ -14,7 +14,7 @@ export default class CreateSpecificationService {
     );
 
     if (specificationExists) {
-      throw new Error(`Specification ${name} already exists`);
+      throw new Error(`Specification "${name}" already exists`);
     }
     this.specificationsRepository.create({ name, description });
   }
