@@ -6,15 +6,21 @@ import ICategoriesRepository, {
 export default class CategoriesRepository implements ICategoriesRepository {
   private categories: Category[];
 
-  constructor() {
+  private static INSTANCE: CategoriesRepository;
+
+  private constructor() {
     this.categories = [];
   }
 
-  list(): Category[] {
-    throw new Error('Method not implemented.');
+  public static getInstance(): CategoriesRepository {
+    if (!CategoriesRepository.INSTANCE) {
+      CategoriesRepository.INSTANCE = new CategoriesRepository();
+    }
+
+    return CategoriesRepository.INSTANCE;
   }
 
-  getAll(): Category[] {
+  list(): Category[] {
     return this.categories;
   }
 
