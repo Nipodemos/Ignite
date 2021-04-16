@@ -1,10 +1,14 @@
 import express from 'express';
+import swaggerUi from 'swagger-ui-express';
 
 import mainRouter from './routes';
+import swaggerConfigFile from './swagger.json';
 
 const app = express();
 
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerConfigFile));
 app.use(mainRouter);
 app.get('/', (request, response) => response.json({ message: 'hello world!' }));
 
