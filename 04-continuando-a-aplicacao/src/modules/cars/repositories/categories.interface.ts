@@ -5,7 +5,7 @@ export interface ICreateCategoryDTO {
   description: string;
 }
 export default interface ICategoriesRepository {
-  findByName(name: string): boolean;
-  list(): Category[];
-  create({ description, name }: ICreateCategoryDTO): void;
+  findByName(name: string): Promise<boolean>;
+  list(): Promise<Category[]>;
+  create({ description, name }: ICreateCategoryDTO): Promise<void>;
 }

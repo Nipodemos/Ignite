@@ -16,13 +16,12 @@ export default class Category {
   @CreateDateColumn({
     name: 'created_at'
   })
-  createdAt: Date;
+  createdAt!: Date;
 
-  constructor({ id, name, description, createdAt }: Category) {
+  constructor({ id, name, description }: Category) {
     this.id = id;
     this.name = name;
     this.description = description;
-    this.createdAt = createdAt;
     if (!this.id) {
       this.id = uuidV4();
     }
