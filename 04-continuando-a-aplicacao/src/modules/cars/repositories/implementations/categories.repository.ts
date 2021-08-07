@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 import Category from '../../entites/category.model';
 import ICategoriesRepository, {
@@ -8,18 +8,8 @@ import ICategoriesRepository, {
 export default class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
-  constructor({repository}: CategoriesRepository) {
-    this.repository = repository;
-  }
-
-  private static INSTANCE: CategoriesRepository;
-
-  public static getInstance(): CategoriesRepository {
-    if (!CategoriesRepository.INSTANCE) {
-      CategoriesRepository.INSTANCE = new CategoriesRepository();
-    }
-
-    return CategoriesRepository.INSTANCE;
+  constructor() {
+    this.repository = getRepository(Category);
   }
 
   async list(): Promise<Category[]> {
