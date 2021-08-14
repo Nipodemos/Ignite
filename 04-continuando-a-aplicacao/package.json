@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "ts-node-dev --unhandled-rejections=strict --trace-warnings --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "typeorm": "ts-node-dev --transpile-only ./node_modules/typeorm/cli "
   },
   "devDependencies": {
@@ -32,6 +32,7 @@
     "pg": "^8.6.0",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.1.6",
+    "tsyringe": "^4.6.0",
     "typeorm": "^0.2.32",
     "uuid": "^8.3.2"
   }

@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
-import Category from '../../entites/category.model';
+import Category from '../../entites/Category';
 import ICategoriesRepository, {
   ICreateCategoryDTO,
 } from '../categories.interface';
@@ -19,18 +19,18 @@ export default class CategoriesRepository implements ICategoriesRepository {
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
     const category = this.repository.create({
       name,
-      description
-    })
+      description,
+    });
 
-    await this.repository.save(category)
+    await this.repository.save(category);
   }
 
   async findByName(name: string): Promise<boolean> {
     const foundCategory = await this.repository.count({
       where: {
-        name
-      }
-    })
+        name,
+      },
+    });
 
     return foundCategory > 0;
   }

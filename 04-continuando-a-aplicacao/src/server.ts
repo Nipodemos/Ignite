@@ -4,7 +4,8 @@ import swaggerUi from 'swagger-ui-express';
 
 import mainRouter from './routes';
 import swaggerConfigFile from './swagger.json';
-import './database'
+import './database';
+import './shared/container';
 
 const app = express();
 

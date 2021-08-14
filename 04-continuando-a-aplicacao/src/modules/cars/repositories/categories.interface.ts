@@ -1,4 +1,4 @@
-import Category from '../entites/category.model';
+import Category from '../entites/Category';
 
 export interface ICreateCategoryDTO {
   name: string;
