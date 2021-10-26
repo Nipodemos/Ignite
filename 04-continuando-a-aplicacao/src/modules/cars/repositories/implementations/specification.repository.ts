@@ -1,28 +1,37 @@
+import { getRepository, Repository } from 'typeorm';
+
 import Specification from '../../entites/specification.model';
 import ISpecificationRepository, {
   ICreateSpecificationDTO,
 } from '../specification.interface';
 
 export default class SpecificationRepository
-  implements ISpecificationRepository {
-  constructor(private specifications: Specification[] = []) {}
+  implements ISpecificationRepository
+{
+  private repository: Repository<Specification>;
 
-  checkExistenceByName(name: string): boolean {
-    const doesSpecificationExists = this.specifications.some(
-      (specification) => specification.name === name,
-    );
-    return doesSpecificationExists;
+  constructor(private specifications: Specification[] = []) {
+    this.repository = getRepository(Specification);
   }
 
-  create({ description, name }: ICreateSpecificationDTO): void {
-    const specification = new Specification({
-      name,
-      description,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+  async checkExistenceByName(name: string): Promise<boolean> {
+    const specification = await this.repository.findOne({
+      where: { name },
     });
-    this.specifications.push(specification);
-    console.log('name :>> ', name);
-    console.log('description :>> ', description);
+    if (!specification) {
+      return false;
+    }
+    return true;
+  }
+
+  async create({
+    description,
+    name,
+  }: ICreateSpecificationDTO): Promise<Specification> {
+    const specification = this.repository.create({
+      description,
+      name,
+    });
+    return this.repository.save(specification);
   }
 }
